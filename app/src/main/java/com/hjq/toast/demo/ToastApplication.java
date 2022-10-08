@@ -2,7 +2,7 @@ package com.hjq.toast.demo;
 
 import android.app.Application;
 
-import com.hjq.toast.ToastUtils;
+import com.hjq.toast.QuickToast;
 
 /**
  *    author : Android 轮子哥
@@ -17,6 +17,6 @@ public final class ToastApplication extends Application {
         super.onCreate();
 
         // 初始化 Toast 框架
-        ToastUtils.init(this);
+        QuickToast.init(this);
     }
 }

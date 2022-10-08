@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@null"
-        app:title="https://github.com/getActivity/ToastUtils" />
+        tools:title="https://github.com/getActivity/ToastUtils" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

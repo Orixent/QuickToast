@@ -19,7 +19,7 @@ import com.hjq.toast.style.WhiteToastStyle;
  *    desc   : Toast 框架（专治 Toast 疑难杂症）
  */
 @SuppressWarnings("unused")
-public final class ToastUtils {
+final class ToastUtils {
 
     /** Application 对象 */
     private static Application sApplication;
@@ -257,7 +257,7 @@ public final class ToastUtils {
         sDebugMode = debug;
     }
 
-    static boolean isDebugMode() {
+    public static boolean isDebugMode() {
         if (sDebugMode == null) {
             sDebugMode = (sApplication.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         }

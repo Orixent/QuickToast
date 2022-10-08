@@ -15,16 +15,17 @@ import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
-import com.hjq.toast.ToastUtils;
+import com.hjq.toast.QuickToast;
+import com.hjq.toast.QuickToast;
 import com.hjq.toast.style.BlackToastStyle;
 import com.hjq.toast.style.WhiteToastStyle;
 import com.hjq.xtoast.XToast;
 
 /**
  *    author : Android 轮子哥
- *    github : https://github.com/getActivity/ToastUtils
+ *    github : https://github.com/getActivity/QuickToast
  *    time   : 2018/09/01
- *    desc   : ToastUtils 使用案例
+ *    desc   : QuickToast 使用案例
  */
 public final class MainActivity extends AppCompatActivity {
 
@@ -45,11 +46,11 @@ public final class MainActivity extends AppCompatActivity {
     }
 
     public void show1(View v) {
-        ToastUtils.show("我是普通的 Toast");
+        QuickToast.show("我是普通的 Toast");
     }
 
     public void show2(View v) {
-        ToastUtils.delayedShow("我是延迟 2 秒显示的 Toast", 2000);
+        QuickToast.delayedShow("我是延迟 2 秒显示的 Toast", 2000);
     }
 
     @SuppressWarnings("AlibabaAvoidManuallyCreateThread")
@@ -58,25 +59,25 @@ public final class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                ToastUtils.show("我是子线程中弹出的吐司");
+                QuickToast.show("我是子线程中弹出的吐司");
             }
         }).start();
     }
 
     public void show4(View v) {
-        ToastUtils.setStyle(new WhiteToastStyle());
-        ToastUtils.show("动态切换白色吐司样式成功");
+        QuickToast.setStyle(new WhiteToastStyle());
+        QuickToast.show("动态切换白色吐司样式成功");
     }
 
     public void show5(View v) {
-        ToastUtils.setStyle(new BlackToastStyle());
-        ToastUtils.show("动态切换黑色吐司样式成功");
+        QuickToast.setStyle(new BlackToastStyle());
+        QuickToast.show("动态切换黑色吐司样式成功");
     }
 
     public void show6(View v) {
-        ToastUtils.setView(R.layout.toast_custom_view);
-        ToastUtils.setGravity(Gravity.CENTER);
-        ToastUtils.show("自定义 Toast 布局");
+        QuickToast.setView(R.layout.toast_custom_view);
+        QuickToast.setGravity(Gravity.CENTER);
+        QuickToast.show("自定义 Toast 布局");
     }
 
     public void show7(View v) {
@@ -96,12 +97,12 @@ public final class MainActivity extends AppCompatActivity {
             public void run() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     if (XXPermissions.isGranted(MainActivity.this, Permission.SYSTEM_ALERT_WINDOW)) {
-                        ToastUtils.show("我是在后台显示的 Toast（有悬浮窗权限真的可以为所欲为）");
+                        QuickToast.show("我是在后台显示的 Toast（有悬浮窗权限真的可以为所欲为）");
                     } else {
-                        ToastUtils.show("我是在后台显示的 Toast（安卓 11 及以上在后台显示只能使用系统样式）");
+                        QuickToast.show("我是在后台显示的 Toast（安卓 11 及以上在后台显示只能使用系统样式）");
                     }
                 } else {
-                    ToastUtils.show("我是在后台显示的 Toast");
+                    QuickToast.show("我是在后台显示的 Toast");
                 }
             }
         }, 3000);
@@ -110,8 +111,8 @@ public final class MainActivity extends AppCompatActivity {
     public void show8(View v) {
         new XToast<>(this)
                 .setDuration(1000)
-                // 将 ToastUtils 中的 View 转移给 XToast 来显示
-                .setContentView(ToastUtils.getStyle().createView(getApplication()))
+                // 将 QuickToast 中的 View 转移给 XToast 来显示
+                .setContentView(QuickToast.getStyle().createView(getApplication()))
                 .setAnimStyle(android.R.style.Animation_Translucent)
                 .setText(android.R.id.message, "就问你溜不溜")
                 .setGravity(Gravity.BOTTOM)
