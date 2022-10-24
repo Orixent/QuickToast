@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+// 添加插件
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 android {
     compileSdkVersion 31
@@ -42,10 +45,6 @@ tasks.withType(Javadoc) {
     options.addStringOption('charSet', 'UTF-8')
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
@@ -57,7 +56,62 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+// 生成jar包的task
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 artifacts {
-    archives javadocJar
     archives sourcesJar
+}
+
+
+group = "io.github.orixent"// groupId
+version = "1.0.0"// 库的当前版本
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonaUsername, password: sonaPassword)
+            }
+
+
+            pom.project {
+                name 'quick-toast'// 项目名称
+                packaging 'aar'// 资源类型
+                artifactId 'quick-toast'// 库名
+                description 'An android toast util'// 描述
+                url 'https://github.com/Orixent/QuickToast'
+                scm {
+                    connection = 'https://github.com/Orixent/QuickToast.git'
+                    developerConnection = 'https://github.com/Orixent/QuickToast.git'
+                    url = 'https://github.com/Orixent/QuickToast'
+                }
+
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'orixent'
+                        name = 'Orixent'
+                        email = 'orixent@163.com'
+                    }
+                }
+            }
+        }
+    }
+}
+// 签名
+signing {
+    sign configurations.archives
 }
