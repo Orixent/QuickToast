@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="cn.orixent.aglie.lib_toast.demo.MainActivity">
 
     <com.hjq.bar.TitleBar
         android:id="@+id/tb_main_bar"
