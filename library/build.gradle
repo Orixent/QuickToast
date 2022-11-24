@@ -68,7 +68,7 @@ artifacts {
 
 
 group = "io.github.orixent"// groupId
-version = "1.0.1"// 库的当前版本
+version = "1.0.3"// 库的当前版本
 
 uploadArchives {
     repositories {
